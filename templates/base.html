@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Startup Organizer
+        {% endblock %}
+    </title>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- [if IE]><script>
+        src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script><![endif]-->
+</head>
+<body>
+<div><!-- container -->
+    <header>
+        <h1>
+            Startup Organizer
+        </h1>
+    </header>
+    <main>
+        {% block content %}
+            This is default content!
+        {% endblock %}
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2016</p>
+    <p>Created for Django Unleashed</p>
+</footer>
+</body>
+</html>
