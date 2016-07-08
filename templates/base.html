@@ -12,14 +12,34 @@
     <!-- [if IE]><script>
         src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
     </script><![endif]-->
+    <style>
+        body {
+            background-color: lightblue
+        }
+    </style>
 </head>
 <body>
 <div><!-- container -->
     <header>
-        <h1>
+        <h1 align="center">
             Startup Organizer
         </h1>
+        <hr>
     </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'blog_post_list' %}">Blog</a>
+            </li>
+            <li>
+                <a href="{% url 'organizer_startup_list' %}">Startups</a>
+            </li>
+            <li>
+                <a href="{% url 'organizer_tag_list' %}">Tags</a>
+            </li>
+        </ul>
+    </nav>
+    <hr style="border-width: 3px">
     <main>
         {% block content %}
             This is default content!

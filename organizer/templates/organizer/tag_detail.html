@@ -15,7 +15,7 @@
                 <!-- List of startups related to tag -->
                 {% for startup in tag.startup_set.all %}
                     <li>
-                        <a href="">
+                        <a href="{{ startup.get_absolute_url }}">
                             {{ startup.name }}
                         </a>
                     </li>
@@ -30,7 +30,7 @@
                 <!-- List of posts related to tag -->
                 {% for post in tag.blog_posts.all %}
                     <li>
-                        <a href="">
+                        <a href="{{ post.get_absolute_url }}">
                             {{ post.title|title }}
                         </a>
                     </li>
