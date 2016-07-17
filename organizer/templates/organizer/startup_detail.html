@@ -23,15 +23,28 @@
 
         {{ startup.description|linebreaks }}
 
+
+        <h3>Recent News</h3>
+        <p>
+            <a href="{% url 'organizer_newslink_create' %}">Add Article</a>
+        </p>
         {% if startup.newslink_set.all %}
             <section>
                 <h3>Recent News</h3>
+                <p>
+                    <a href="{% url 'organizer_newslink_create' %}">Add Article</a>
+                </p>
                 <ul>
                     {% for newslink in startup.newslink_set.all %}
                         <li>
                             <a href="{{ newslink.link }}">
                                 {{ newslink.title|title }}
                             </a>
+                            <ul>
+                                <li>
+                                    <a href="{{ newslink.get_update_url }}">
+                                        Edit Link</a></li>
+                            </ul>
                         </li>
                     {% endfor %}
                 </ul>
