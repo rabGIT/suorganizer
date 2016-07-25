@@ -1,9 +1,10 @@
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import View
 
-from .models import Tag, Startup
+from .models import Tag, Startup, NewsLink
 from .forms import TagForm, NewsLinkForm, StartupForm
-from .utils import ObjectCreateMixin, ObjectUpdateMixin
+from .utils import ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 # Create your views here.
 
 
@@ -25,6 +26,25 @@ def startup_detail(request, slug):
     return render(request, 'organizer/startup_detail.html', {'startup': startup})
 
 
+class StartupCreate(ObjectCreateMixin, View):
+    form_class = StartupForm
+    template_name = 'organizer/startup_form.html'
+
+
+class StartupDelete(ObjectDeleteMixin, View):
+    model = Startup
+    success_url = reverse_lazy(
+        'organizer_startup_list')
+    template_name = (
+        'organizer/startup_confirm_delete.html')
+
+
+class StartupUpdate(ObjectUpdateMixin, View):
+    form_class = StartupForm
+    model = Startup
+    template_name = 'organizer/startup_form_update.html'
+
+
 # def tag_create(request):
 #    if request.method == 'POST':
 #        form = TagForm(request.POST)
@@ -39,6 +59,14 @@ def startup_detail(request, slug):
 class TagCreate(ObjectCreateMixin, View):
     form_class = TagForm
     template_name = 'organizer/tag_form.html'
+
+
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    success_url = reverse_lazy(
+        'organizer_tag_list')
+    template_name = (
+        'organizer/tag_confirm_delete.html')
 
 
 class TagUpdate(ObjectUpdateMixin, View):
@@ -86,6 +114,18 @@ class NewsLinkUpdate(View):
                 context)
 
 
-class StartupCreate(ObjectCreateMixin, View):
-    form_class = StartupForm
-    template_name = 'organizer/startup_form.html'
+class NewsLinkDelete(View):
+    def get(self, request, pk):
+        newslink = get_object_or_404(NewsLink, pk=pk)
+        return render(
+            request,
+            'organizer/'
+            'newslink_confirm_delete.html',
+            {'newslink': newslink})
+
+    def post(self, request, pk):
+        newslink = get_object_or_404(
+            NewsLink, pk=pk)
+        startup = newslink.startup
+        newslink.delete()
+        return redirect(startup)

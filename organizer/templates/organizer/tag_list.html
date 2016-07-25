@@ -18,6 +18,14 @@
                     {{ tag.name|title }}
                 </a>
             </li>
+            <ul>
+                <li>
+                    <a href="{{ tag.get_update_url }}">Edit Tag</a>
+                </li>
+                <li>
+                    <a href="{{ tag.get_delete_url }}">Delete Tag</a>
+                </li>
+            </ul>
         {% empty %}
             <li><em>There are currently no Tags available.</em></li>
         {% endfor %}

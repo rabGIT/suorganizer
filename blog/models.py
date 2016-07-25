@@ -20,6 +20,10 @@ class Post(models.Model):
         return reverse('blog_post_update',
                        kwargs={'year': self.pub_date.year, 'month': self.pub_date.month, 'slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse('blog_post_delete',
+                       kwargs={'year': self.pub_date.year, 'month': self.pub_date.month, 'slug': self.slug})
+
     def __str__(self):
         return "{} on {}".format(self.title, self.pub_date.strftime('%Y-%m-%d'))
 
